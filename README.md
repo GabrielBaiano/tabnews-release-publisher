@@ -1,58 +1,59 @@
 <p align="center">
-  <img src="https://img.icons8.com/color/120/000000/bot.png" alt="TabNews Release Publisher Logo" width="120"/>
+  <img src="https://img.icons8.com/color/120/000000/bot.png" alt="Logo do TabNews Release Publisher" width="120"/>
 </p>
 
 <h1 align="center">TabNews Release Publisher</h1>
 
 <p align="center">
-  <strong>Publish release updates automatically to TabNews with automatic translation and tone customization using Gemini API.</strong><br>
-  <em>Promote, announce, and document your releases automatically in Brazil's premier developer community.</em>
+  <strong>Publique atualizações de versão automaticamente no TabNews com tradução e tom de voz personalizados via API do Gemini.</strong><br>
+  <em>Promova, anuncie e documente seus lançamentos de forma automatizada na maior comunidade de desenvolvedores do Brasil.</em>
 </p>
 
 <p align="center">
+  <a href="README.en.md"><img src="https://img.shields.io/badge/Language-English-blue.svg" alt="English Version"></a>
   <a href="https://github.com/GabrielBaiano/tabnews-release-publisher"><img src="https://img.shields.io/badge/GitHub-Actions-orange.svg?logo=github" alt="GitHub Actions"></a>
   <a href="https://www.npmjs.com/package/tabnews-release-publisher"><img src="https://img.shields.io/npm/v/tabnews-release-publisher.svg?color=red" alt="NPM Version"></a>
-  <a href="https://github.com/GabrielBaiano/tabnews-release-publisher/blob/main/LICENSE"><img src="https://img.shields.io/github/license/GabrielBaiano/tabnews-release-publisher.svg" alt="License"></a>
+  <a href="https://github.com/GabrielBaiano/tabnews-release-publisher/blob/main/LICENSE"><img src="https://img.shields.io/github/license/GabrielBaiano/tabnews-release-publisher.svg" alt="Licença"></a>
 </p>
 
 ---
 
-## Table of Contents
-- [Introduction](#introduction)
-- [How It Works](#how-it-works)
-- [How to Use (Quick Start)](#how-to-use-quick-start)
-  - [GitHub Actions Integration](#github-actions-integration)
-  - [CLI / NPM Integration](#cli--npm-integration)
-- [Configuration and Parameters](#configuration-and-parameters)
-- [Available Tones](#available-tones)
-- [Developer Setup](#developer-setup)
-- [License](#license)
+## Tabela de Conteúdos
+- [Introdução](#introdução)
+- [Como Funciona](#como-funciona)
+- [Como Usar (Início Rápido)](#como-usar-início-rápido)
+  - [Integração com GitHub Actions](#integração-com-github-actions)
+  - [Integração com CLI / NPM](#integração-com-cli--npm)
+- [Configurações e Parâmetros](#configurações-e-parâmetros)
+- [Tons de Voz Disponíveis](#tons-de-voz-disponíveis)
+- [Configuração de Desenvolvimento](#configuração-de-desenvolvimento)
+- [Licença](#licença)
 
 ---
 
-## Introduction
-**TabNews Release Publisher** is an open-source tool designed to automate the process of publishing software release announcements to [TabNews](https://www.tabnews.com.br). 
+## Introdução
+O **TabNews Release Publisher** é uma ferramenta de código aberto projetada para automatizar o processo de publicação de anúncios de novas versões de software no [TabNews](https://www.tabnews.com.br).
 
-Writing release logs in English is standard for open source projects, but sharing them on Portuguese-speaking developer forums like TabNews can be time-consuming. This tool uses **Gemini API** to automatically translate and rewrite your release logs into engaging, platform-appropriate Portuguese, using different tones of voice based on your goals (e.g. promoting beta tests or detailing technical updates).
+Escrever notas de lançamento (changelogs) em inglês é o padrão para projetos Open Source globais, mas compartilhar essas novidades em fóruns de tecnologia lusófonos como o TabNews pode consumir tempo. Esta ferramenta utiliza a **API do Gemini** para traduzir e reescrever automaticamente seu changelog em um português brasileiro natural e engajante, usando diferentes tons de voz de acordo com seus objetivos (como promover testes beta ou detalhar atualizações técnicas).
 
 ---
 
-## How It Works
+## Como Funciona
 ```
-[GitHub Release (English)] ──> [Gemini API (Translates & Adapts Tone)] ──> [TabNews API (Publishes in PT-BR)]
+[GitHub Release (Inglês)] ──> [API do Gemini (Traduz e Adapta o Tom)] ──> [API do TabNews (Publica em PT-BR)]
 ```
 
-When you publish a new release, the tool reads the description and version. It then requests Gemini to translate the changelog and rewrite the post in Portuguese, applying a customized tone of voice (e.g. enthusiastic marketing for a beta launch, or structured lists for a technical update). Finally, it logs into TabNews and publishes the post.
+Ao publicar um novo release no GitHub, a ferramenta lê o título e a descrição. Em seguida, solicita ao Gemini que traduza o changelog e adapte o texto para o português, aplicando o tom de voz escolhido (como um pitch de marketing entusiasta para betas ou listas estruturadas para updates técnicos). Por fim, autentica-se no TabNews e publica o conteúdo.
 
 ---
 
-## How to Use (Quick Start)
+## Como Usar (Início Rápido)
 
-### GitHub Actions Integration
-To automatically announce new versions as soon as they are published, add the following workflow to `.github/workflows/tabnews-announcement.yml`:
+### Integração com GitHub Actions
+Para anunciar novas versões automaticamente assim que forem publicadas, adicione o seguinte fluxo de trabalho em `.github/workflows/tabnews-announcement.yml`:
 
 ```yaml
-name: Publish to TabNews
+name: Publicar no TabNews
 
 on:
   release:
@@ -62,7 +63,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Publish to TabNews
+      - name: Publicar no TabNews
         uses: GabrielBaiano/tabnews-release-publisher@v1
         with:
           tabnews_email: ${{ secrets.TABNEWS_EMAIL }}
@@ -71,21 +72,21 @@ jobs:
           tone: 'auto'
 ```
 
-#### 🔑 Secret Configurations
-Go to **Settings > Secrets and variables > Actions > New repository secret** and add:
-1. `TABNEWS_EMAIL`: The email of your TabNews account.
-2. `TABNEWS_PASSWORD`: The password of your TabNews account.
-3. `GEMINI_API_KEY`: Your Gemini API key (get it for free at [Google AI Studio](https://aistudio.google.com)).
+#### 🔑 Configurando as Secrets no GitHub
+Vá em **Settings > Secrets and variables > Actions > New repository secret** e adicione:
+1. `TABNEWS_EMAIL`: O e-mail da sua conta no TabNews.
+2. `TABNEWS_PASSWORD`: A senha da sua conta no TabNews.
+3. `GEMINI_API_KEY`: Sua chave de API do Gemini (obtenha gratuitamente em [Google AI Studio](https://aistudio.google.com)).
 
-### CLI / NPM Integration
-You can run the publisher locally or inside other CI/CD pipelines (like GitLab CI or Bitbucket Pipelines) using `npx`:
+### Integração com CLI / NPM
+Você pode rodar o publicador localmente ou em outras esteiras de CI/CD (como GitLab CI ou Bitbucket) usando `npx`:
 
 ```bash
 npx tabnews-release-publisher \
-  --email "your-email@provider.com" \
-  --password "your-password" \
-  --gemini-api-key "YOUR_GEMINI_API_KEY" \
-  --project "My Project Name" \
+  --email "seu-email@provedor.com" \
+  --password "sua-senha" \
+  --gemini-api-key "SUA_API_KEY_DO_GEMINI" \
+  --project "Nome do Meu Projeto" \
   --version-name "v1.0.0" \
   --changelog "Fixed memory leaks and added automated discord notification webhook." \
   --tone "divulgacao"
@@ -93,57 +94,57 @@ npx tabnews-release-publisher \
 
 ---
 
-## Configuration and Parameters
+## Configurações e Parâmetros
 
-| Input (Actions) | CLI Flag | Description | Required | Default |
+| Entrada (Actions) | Opção (CLI) | Descrição | Obrigatório | Padrão |
 | :--- | :--- | :--- | :--- | :--- |
-| `tabnews_email` | `--email` | E-mail for your TabNews account | **Yes** | - |
-| `tabnews_password` | `--password` | Password for your TabNews account | **Yes** | - |
-| `gemini_api_key` | `--gemini-api-key` | Google Gemini API Key | **Yes** | - |
-| `project_name` | `--project` | Name of your project to display | No | Repository Name |
-| `tone` | `--tone` | Tone of post: `propaganda`, `divulgacao`, `update`, `auto` | No | `auto` |
-| `version` | `--version-name` | Custom version string | No | Release tag |
-| `changelog` | `--changelog` | Markdown changelog text in English | No | Release description |
-| `source_url` | `--source-url` | Source code link or homepage | No | Repository URL |
+| `tabnews_email` | `--email` | E-mail da conta do TabNews | **Sim** | - |
+| `tabnews_password` | `--password` | Senha da conta do TabNews | **Sim** | - |
+| `gemini_api_key` | `--gemini-api-key` | Chave de API do Google Gemini | **Sim** | - |
+| `project_name` | `--project` | Nome do projeto a ser exibido | Não | Nome do Repositório |
+| `tone` | `--tone` | Tom do post: `propaganda`, `divulgacao`, `update`, `auto` | Não | `auto` |
+| `version` | `--version-name` | Versão customizada (tag) | Não | Tag do release do GitHub |
+| `changelog` | `--changelog` | Changelog/Notas em inglês a serem traduzidas | Não | Descrição do release |
+| `source_url` | `--source-url` | Link original do repositório ou site | Não | URL do repositório |
 
 ---
 
-## Available Tones
+## Tons de Voz Disponíveis
 
-- **`propaganda` (Beta Test / Pitch):** Active, conversion-oriented, inviting users to test, download, and give feedback (e.g. "[v0.1.0] BETA TEST OPEN!").
-- **`divulgacao` (Launch / General):** Focuses on the story behind the project, why you built it, the problems it solves, and how developers can get started.
-- **`update` (Technical Release):** Direct, structured changelog categorized into features, fixes, and performance improvements.
-- **`auto` (Automatic Detection):** Detects terms like "beta", "alpha", "test", or "feedback" to switch to `propaganda`, uses `divulgacao` for v1.0.0 milestones, and falls back to `update` for standard versions.
+- **`propaganda` (Teste Beta / Pitch):** Ativo, voltado para conversão, convidando desenvolvedores a testarem, baixarem e deixarem feedbacks (ex: "[v0.1.0] BETA TEST OPEN!").
+- **`divulgacao` (Lançamento Geral):** Foca na história por trás do projeto, por que ele foi construído, os problemas que resolve e como dar os primeiros passos.
+- **`update` (Notas Técnicas):** Direto, estruturado, organizando melhorias e correções em tópicos claros para atualizações incrementais.
+- **`auto` (Detecção Automática):** Busca termos como "beta", "alpha", "test" ou "feedback" para usar `propaganda`, usa `divulgacao` para marcos v1.0.0 e utiliza `update` para versões padrão.
 
 ---
 
-## Developer Setup
+## Configuração de Desenvolvimento
 
-If you want to contribute to this project:
+Caso queira contribuir com o projeto:
 
-1. Clone the repository:
+1. Clone o repositório:
    ```bash
    git clone https://github.com/GabrielBaiano/tabnews-release-publisher.git
    cd tabnews-release-publisher
    ```
-2. Install the dependencies:
+2. Instale as dependências:
    ```bash
    npm install
    ```
-3. Copy `.env.example` to `.env` and fill in your test credentials:
+3. Copie o `.env.example` para `.env` e preencha suas credenciais de teste:
    ```bash
    cp .env.example .env
    ```
-4. Build the project:
+4. Compile o projeto:
    ```bash
    npm run build
    ```
-5. Test locally:
+5. Teste localmente:
    ```bash
-   node dist/index.js --project "Test Project" --changelog "Added cool stuff"
+   node dist/index.js --project "Projeto Teste" --changelog "Added cool stuff"
    ```
 
 ---
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Licença
+Este projeto está sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
