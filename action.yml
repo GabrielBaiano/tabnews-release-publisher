@@ -1,5 +1,5 @@
 name: 'TabNews Release Publisher'
-description: 'Publish release updates automatically to TabNews with automatic translation and tone customization using Gemini API.'
+description: 'Publish release updates automatically to TabNews with automatic translation and tone customization using Gemini, OpenAI or Claude APIs.'
 author: 'GabrielBaiano'
 inputs:
   tabnews_email:
@@ -8,9 +8,25 @@ inputs:
   tabnews_password:
     description: 'Senha da conta no TabNews'
     required: true
+  ai_provider:
+    description: 'Provedor de inteligência artificial: gemini, openai ou anthropic'
+    required: false
+    default: 'gemini'
+  ai_api_key:
+    description: 'Chave de API genérica para a IA escolhida'
+    required: false
   gemini_api_key:
-    description: 'Chave de API do Gemini para tradução e tom'
-    required: true
+    description: 'Chave de API do Gemini (Google AI Studio)'
+    required: false
+  openai_api_key:
+    description: 'Chave de API do OpenAI (ChatGPT)'
+    required: false
+  anthropic_api_key:
+    description: 'Chave de API do Anthropic (Claude)'
+    required: false
+  model_name:
+    description: 'Modelo customizado do provedor de IA (ex: gpt-4o, claude-3-5-sonnet)'
+    required: false
   project_name:
     description: 'Nome do seu projeto (opcional, padrão é o nome do repositório)'
     required: false
