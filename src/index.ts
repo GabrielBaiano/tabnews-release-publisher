@@ -187,12 +187,16 @@ async function main() {
     logInfo(`Post gerado com sucesso!`);
     logInfo(`Título: "${generatedPost.title}"`);
 
+    // Append automated bot footer at the end of the post body
+    const botFooter = `\n\n---\n\n*Este post foi gerado de forma automatizada por um [robô contribuidor](https://github.com/GabrielBaiano/tabnews-release-publisher) que traduz e compartilha lançamentos importantes no TabNews.*`;
+    const finalBody = generatedPost.body + botFooter;
+
     // 2. Publish to TabNews
     logInfo('Publicando no TabNews...');
     const tabnews = new TabNewsClient(config.tabnewsEmail, config.tabnewsPassword);
     const publishResult = await tabnews.publish({
       title: generatedPost.title,
-      body: generatedPost.body,
+      body: finalBody,
       source_url: config.sourceUrl,
     });
 
