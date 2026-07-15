@@ -32,8 +32,8 @@ export class TabNewsClient {
         password: this.password,
       });
 
-      // The session ID is typically the 'id' field returned in the response body.
-      const sessionId = response.data.id || response.data.token;
+      // The 96-character session token is the 'token' field returned in the response.
+      const sessionId = response.data.token || response.data.id;
       if (!sessionId) {
         throw new Error('Não foi possível obter o ID de sessão na resposta da API.');
       }
