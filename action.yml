@@ -1,5 +1,5 @@
 name: 'TabNews Release Publisher'
-description: 'Publish release updates automatically to TabNews with automatic translation and tone customization using Gemini, OpenAI or Claude APIs.'
+description: 'Auto-publish translated release notes to TabNews with custom tone using Gemini, OpenAI or Claude.'
 author: 'GabrielBaiano'
 inputs:
   tabnews_email:
