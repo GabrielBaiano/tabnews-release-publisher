@@ -1,0 +1,21 @@
+name: Divulgar Release no TabNews
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Publicar no TabNews
+        uses: ./
+        with:
+          tabnews_email: ${{ secrets.TABNEWS_EMAIL }}
+          tabnews_password: ${{ secrets.TABNEWS_PASSWORD }}
+          ai_provider: 'gemini'
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          tone: 'auto'
