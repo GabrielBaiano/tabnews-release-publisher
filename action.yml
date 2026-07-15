@@ -1,0 +1,38 @@
+name: 'TabNews Release Publisher'
+description: 'Publish release updates automatically to TabNews with automatic translation and tone customization using Gemini API.'
+author: 'GabrielBaiano'
+inputs:
+  tabnews_email:
+    description: 'E-mail do robô / conta no TabNews'
+    required: true
+  tabnews_password:
+    description: 'Senha da conta no TabNews'
+    required: true
+  gemini_api_key:
+    description: 'Chave de API do Gemini para tradução e tom'
+    required: true
+  project_name:
+    description: 'Nome do seu projeto (opcional, padrão é o nome do repositório)'
+    required: false
+  tone:
+    description: 'Tom da postagem no TabNews (propaganda, divulgacao, update, auto)'
+    required: false
+    default: 'auto'
+  version:
+    description: 'Versão do lançamento (opcional, extraído da tag no release)'
+    required: false
+  changelog:
+    description: 'Notas de lançamento / Changelog (opcional, extraído da descrição do release)'
+    required: false
+  source_url:
+    description: 'URL original da fonte do lançamento'
+    required: false
+outputs:
+  post_url:
+    description: 'URL do post criado no TabNews'
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+branding:
+  icon: 'globe'
+  color: 'orange'
